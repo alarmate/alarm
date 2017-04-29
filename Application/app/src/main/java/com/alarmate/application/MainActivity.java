@@ -13,5 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("myTag", "hello");
         /* test ver 1 */
+
+        /* log 2 */
+        
     }
 }
