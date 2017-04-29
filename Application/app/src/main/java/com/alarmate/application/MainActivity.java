@@ -16,12 +16,10 @@ public class MainActivity extends AppCompatActivity {
 
         /* log 2 */
 
-<<<<<<< HEAD
+
         /* sdfsdf*/
 
-=======
         /* test*/
         
->>>>>>> 51e36e9f3baf96753d4297336d2f465b0ec00608
     }
 }
