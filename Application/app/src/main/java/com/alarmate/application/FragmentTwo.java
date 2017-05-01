@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 /**
  * Created by seongjinlee on 2017. 5. 1..
+ *
  */
 
 public class FragmentTwo extends Fragment {
