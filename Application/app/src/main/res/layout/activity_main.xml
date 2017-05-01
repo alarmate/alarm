@@ -10,8 +10,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.alarmate.application.MainActivity">
 
-    <TextView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll">
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_tab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btn1"/>
+        <Button
+            android:id="@+id/btn_tab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btn2"/>
+
+        <Button
+            android:id="@+id/btn_tab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btn3"/>
+    </LinearLayout>
+
+
 </RelativeLayout>
