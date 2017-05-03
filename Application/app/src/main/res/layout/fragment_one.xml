@@ -4,17 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/frameOne"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
-            android:orientation="horizontal"/>
-        </LinearLayout>
+    <include layout="@layout/fragment_one_internal"
+        android:id="@+id/frameOne"></include>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_alarm"
