@@ -1,5 +1,6 @@
 package com.alarmate.application;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,14 @@ public class AlarmReceiver extends BroadcastReceiver{
         // TODO Auto-generated method stub
         Intent mServiceIntent = new Intent(context, AlarmService.class);
         context.startService(mServiceIntent);
+
+        Intent intent1 = new Intent( context, AlarmActivity.class );
+        PendingIntent pi = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_ONE_SHOT);
+        try {
+            pi.send();
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
     }
 
 }
