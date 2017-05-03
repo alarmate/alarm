@@ -19,36 +19,44 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <TextView
             android:id="@+id/btn_tab1"
-            android:layout_height="match_parent"
             android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:text="btn1" />
-        <Button
+            android:gravity="center"
+            android:textColor="@drawable/tab_color_selector"
+            android:background="@drawable/tab_bg_selector"
+            android:text="TAB1" />
+        <TextView
             android:id="@+id/btn_tab2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:text="btn2"/>
+            android:gravity="center"
+            android:textColor="@drawable/tab_color_selector"
+            android:background="@drawable/tab_bg_selector"
+            android:text="TAB2"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_tab3"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:text="btn3"/>
+            android:gravity="center"
+            android:textColor="@drawable/tab_color_selector"
+            android:background="@drawable/tab_bg_selector"
+            android:text="TAB3"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_tab4"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:text="btn4"/>
+            android:gravity="center"
+            android:textColor="@drawable/tab_color_selector"
+            android:background="@drawable/tab_bg_selector"
+            android:text="TAB4"/>
 
     </LinearLayout>
 

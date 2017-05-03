@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -35,6 +37,9 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
     AlarmManager alarmManager;
     EditText txt_hour, txt_min;
     Button btn_register;
+    Animation fabClockWise, fabAntiClockWise;
+    private boolean isOpen = true;
+    FloatingActionButton addBtn;
 
     public FragmentOne(){
 
@@ -49,10 +54,13 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.activity = (MainActivity) getActivity();
         CoordinatorLayout layout = (CoordinatorLayout)inflater.inflate(R.layout.fragment_one, container, false);
-        FloatingActionButton addBtn = (FloatingActionButton)layout.findViewById(R.id.add_alarm);
+        addBtn = (FloatingActionButton)layout.findViewById(R.id.add_alarm);
+        fabClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_clockwise);
+        fabAntiClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_anticlockwise);
+
+
         txt_hour = (EditText)layout.findViewById(R.id.add_hour);
         txt_min = (EditText)layout.findViewById(R.id.add_min);
-
 
         slidingLayout = (SlidingUpPanelLayout)layout.findViewById(R.id.sliding_layout);
         slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
@@ -63,6 +71,14 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
                 if(slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN)
                     slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
                 else slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+                if(isOpen){
+                    addBtn.startAnimation(fabClockWise);
+                    isOpen = false;
+                }
+                else {
+                    addBtn.startAnimation(fabAntiClockWise);
+                    isOpen = true;
+                }
 //                Toast.makeText(context, "Add Alarm", Toast.LENGTH_SHORT).show();
             }
         };
