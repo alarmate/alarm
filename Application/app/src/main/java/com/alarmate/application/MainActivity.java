@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -26,19 +27,32 @@ public class MainActivity extends AppCompatActivity {
 
         vp = (ViewPager)findViewById(R.id.vp);
 
-        Button btn1 = (Button)findViewById(R.id.btn_tab1);
-        Button btn2 = (Button)findViewById(R.id.btn_tab2);
-        Button btn3 = (Button)findViewById(R.id.btn_tab3);
+        final Button btn1 = (Button)findViewById(R.id.btn_tab1);
+        final Button btn2 = (Button)findViewById(R.id.btn_tab2);
+        final Button btn3 = (Button)findViewById(R.id.btn_tab3);
 
         vp.setAdapter(new PageAdapter(this.getSupportFragmentManager()));
         vp.setCurrentItem(0);
-
         View.OnClickListener movePageListener = new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 int tag = (int)v.getTag();
                 vp.setCurrentItem(tag);
+                if(tag == 0){
+                    btn1.setBackgroundColor(Color.BLUE);
+                    btn2.setBackgroundColor(Color.WHITE);
+                    btn3.setBackgroundColor(Color.WHITE);
+                }
+                if(tag == 1){
+                    btn1.setBackgroundColor(Color.WHITE);
+                    btn2.setBackgroundColor(Color.BLUE);
+                    btn3.setBackgroundColor(Color.WHITE);
+                }
+                if(tag == 2){
+                    btn1.setBackgroundColor(Color.WHITE);
+                    btn2.setBackgroundColor(Color.WHITE);
+                    btn3.setBackgroundColor(Color.BLUE);
+                }
             }
         };
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -20,20 +21,35 @@
 
         <Button
             android:id="@+id/btn_tab1"
+            android:layout_height="match_parent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="btn1"/>
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:text="btn1" />
         <Button
             android:id="@+id/btn_tab2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
             android:text="btn2"/>
 
         <Button
             android:id="@+id/btn_tab3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
             android:text="btn3"/>
+
+        <Button
+            android:id="@+id/btn_tab4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:text="btn4"/>
+
     </LinearLayout>
 
 
