@@ -6,9 +6,9 @@ package com.alarmate.application;
 
 public interface DBAlarm {
     public int DBConnect();
-    public int addAlarm();
-    public int updateAlarm();
-    public int removeAlarm();
+    public int addAlarm(AlarmItem item);
+    public int updateAlarm(AlarmItem item);
+    public int removeAlarm(AlarmItem item);
     public AlarmItem[] getAlarms();
 
 }
