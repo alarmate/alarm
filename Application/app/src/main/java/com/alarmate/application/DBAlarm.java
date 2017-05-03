@@ -9,4 +9,6 @@ public interface DBAlarm {
     public int addAlarm();
     public int updateAlarm();
     public int removeAlarm();
+    public AlarmItem[] getAlarms();
+
 }
