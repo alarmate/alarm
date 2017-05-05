@@ -31,15 +31,14 @@ import java.util.Calendar;
  */
 
 public class FragmentOne extends Fragment implements View.OnClickListener{
-    public static int i = 0;
-    SlidingUpPanelLayout slidingLayout;
-    MainActivity activity;
-    AlarmManager alarmManager;
-    EditText txt_hour, txt_min;
-    Button btn_register;
-    Animation fabClockWise, fabAntiClockWise;
-    private boolean isOpen = true;
-    FloatingActionButton addBtn;
+    private static int i = 0;
+    private SlidingUpPanelLayout slidingLayout;
+    private MainActivity activity;
+    private AlarmManager alarmManager;
+    private EditText txt_hour, txt_min;
+    private Button btn_register;
+    private Animation fabClockWise, fabAntiClockWise;
+    private FloatingActionButton addBtn;
 
     public FragmentOne(){
 
@@ -68,21 +67,21 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         View.OnClickListener addAlarmListener = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN)
-                    slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-                else slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-                if(isOpen){
+                if(slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN){
                     addBtn.startAnimation(fabClockWise);
-                    isOpen = false;
+                    slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
                 }
                 else {
+                    slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
                     addBtn.startAnimation(fabAntiClockWise);
-                    isOpen = true;
                 }
 //                Toast.makeText(context, "Add Alarm", Toast.LENGTH_SHORT).show();
             }
         };
+
         addBtn.setOnClickListener(addAlarmListener);
+        slidingLayout.setTouchEnabled(false);
+
 
         btn_register = (Button)layout.findViewById(R.id.btn_register);
         btn_register.setOnClickListener(this);

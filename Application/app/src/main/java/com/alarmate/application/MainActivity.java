@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.astuetz.PagerSlidingTabStrip;
+
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager vp;
     private LinearLayout ll;
     public static int i= 0;
+    private PagerSlidingTabStrip tabStrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,69 +36,54 @@ public class MainActivity extends AppCompatActivity {
         vp = (ViewPager)findViewById(R.id.vp);
         ll = (LinearLayout)findViewById(R.id.ll);
 
-        final TextView btn1 = (TextView)findViewById(R.id.btn_tab1);
-        final TextView btn2 = (TextView)findViewById(R.id.btn_tab2);
-        final TextView btn3 = (TextView)findViewById(R.id.btn_tab3);
-
         vp.setAdapter(new PageAdapter(this.getSupportFragmentManager()));
         vp.setCurrentItem(0);
-        View.OnClickListener movePageListener = new View.OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                int tag = (int) v.getTag();
-                int i = 0;
-                while(i<3)
-                {
-                    if(tag==i)ll.findViewWithTag(i).setSelected(true);
-                    else ll.findViewWithTag(i).setSelected(false);
-                    i++;
-                }
-                vp.setCurrentItem(tag);
-            }
+//        View.OnClickListener movePageListener = new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v)
+//            {
+//                int tag = (int) v.getTag();
+//                int i = 0;
+//                while(i<3)
+//                {
+//                    if(tag==i)ll.findViewWithTag(i).setSelected(true);
+//                    else ll.findViewWithTag(i).setSelected(false);
+//                    i++;
+//                }
+//                vp.setCurrentItem(tag);
+//            }
+//
+//        };
 
-        };
+//        ViewPager.OnPageChangeListener vpChngListener = new ViewPager.OnPageChangeListener(){
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//            @Override
+//            public void onPageSelected(int position) {
+//                int i = 0;
+//                while(i<3)
+//                {
+//                    if(position==i)
+//                    {
+//                        ll.findViewWithTag(i).setSelected(true);
+//                    }
+//                    else
+//                    {
+//                        ll.findViewWithTag(i).setSelected(false);
+//                    }
+//                    i++;
+//                }
+//            }
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        };
+//        vp.addOnPageChangeListener(vpChngListener);
 
-        btn1.setOnClickListener(movePageListener);
-        btn2.setOnClickListener(movePageListener);
-        btn3.setOnClickListener(movePageListener);
-        btn1.setTag(0);
-        btn2.setTag(1);
-        btn3.setTag(2);
-
-        btn1.setSelected(true);
-
-
-        ViewPager.OnPageChangeListener vpChngListener = new ViewPager.OnPageChangeListener(){
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                int i = 0;
-                while(i<3)
-                {
-                    if(position==i)
-                    {
-                        ll.findViewWithTag(i).setSelected(true);
-                    }
-                    else
-                    {
-                        ll.findViewWithTag(i).setSelected(false);
-                    }
-                    i++;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        };
-        vp.addOnPageChangeListener(vpChngListener);
+        tabStrip = (PagerSlidingTabStrip)findViewById(R.id.tab_strip);
+        tabStrip.setViewPager(vp);
 
 //        alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
 //        setAlarm(14,19,10,false);

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 
 public class PageAdapter extends FragmentStatePagerAdapter {
+    private String[] pageTitle = {"TAB1", "TAB2", "TAB3"};
 
 
     public PageAdapter(FragmentManager fm) {
@@ -36,5 +37,10 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return 3;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return pageTitle[position];
     }
 }
