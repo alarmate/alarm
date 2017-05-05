@@ -6,6 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+<<<<<<< HEAD
+=======
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll">
+
+    </android.support.v4.view.ViewPager>
+
+>>>>>>> 1a2dec68c8feba09b126e328ade2cb0519d2a5cd
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -14,15 +15,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -39,6 +50,13 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
     private Button btn_register;
     private Animation fabClockWise, fabAntiClockWise;
     private FloatingActionButton addBtn;
+
+    // 디비매니저 , 리스트 뷰 추가
+    private DB dbManager;
+    MyListAdapter alarmListAdapter;
+    ListView alarmList;
+    Switch alarm_enable;
+
 
     public FragmentOne(){
 
@@ -87,6 +105,31 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         btn_register.setOnClickListener(this);
 
         alarmManager = (AlarmManager)activity.getSystemService(Context.ALARM_SERVICE);
+
+
+        dbManager = new DB(activity);
+        alarmList = (ListView) layout.findViewById(R.id.alarm_list);
+//        alarmList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                AlarmItem alarm = (AlarmItem) parent.getItemAtPosition(position);
+//                Switch sw = (Switch) view.findViewById(R.id.alarm_enable_button);
+//                alarm.setEnable(sw.isChecked()?"Y":"N");
+//                Log.d("tinyhhj",alarm.getEnable());
+//            }
+//        });
+
+
+        dbManager.DBConnect();
+
+        ArrayList<AlarmItem> lists = dbManager.getAlarms();
+//        for(int i = 0 ; i <lists.size() ; i++)
+//            Log.d("tinyhhj","lists : " + lists.get(i).showAInfo());
+        alarmListAdapter = new MyListAdapter(activity, lists);
+
+        alarmList.setAdapter(alarmListAdapter);
+
+        dbManager.DBClose();
         return layout;
     }
 
@@ -123,5 +166,60 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
                 setAlarm(hour, min, 0, false);
             }
         }
+
+    }
+    /*************************************************************/
+    /* AlarmItem lists를 view로 보여주는 adapter*/
+    /*************************************************************/
+    public class MyListAdapter extends ArrayAdapter<AlarmItem>
+    {
+        ArrayList<AlarmItem> originArr;
+
+        public MyListAdapter (Context context, ArrayList<AlarmItem> alarms)
+        {
+            super(context, 0 , alarms);
+            originArr = alarms;
+        }
+
+        @Override
+        public View getView(int position , View convertView , ViewGroup parent)
+        {
+            AlarmItem alarm = getItem(position);
+            final int idx = position;
+            if(convertView == null)
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item , parent , false);
+            TextView lists_alarm_title = (TextView) convertView.findViewById(R.id.alarm_title);
+            TextView lists_alarm_time  = (TextView) convertView.findViewById(R.id.alarm_time);
+            Switch lists_alarm_enable_button = (Switch) convertView.findViewById(R.id.alarm_enable_button);
+            lists_alarm_enable_button.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    originArr.get(idx).setEnable(isChecked?"Y":"N");
+                }
+            });
+
+            lists_alarm_title.setText(alarm.getTitle());
+            lists_alarm_time.setText(alarm.getTime());
+            lists_alarm_enable_button.setChecked((alarm.getEnable().equals("Y"))?true:false);
+
+
+            return convertView;
+        }
+        public ArrayList<AlarmItem> getModifyList()
+        {
+            return originArr;
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        ArrayList<AlarmItem> ptr = alarmListAdapter.getModifyList();
+        dbManager.DBConnect();
+        for(int i = 0 ; i < ptr.size() ; i++)
+            dbManager.updateAlarm(ptr.get(i));
+        dbManager.DBClose();
+
     }
 }
