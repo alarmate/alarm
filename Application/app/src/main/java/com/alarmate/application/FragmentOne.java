@@ -65,10 +65,12 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("tinyhhj" , "### life cycle : onCreate start ### " + this.toString());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("tinyhhj" , "### life cycle : onCreateView start ###");
         this.activity = (MainActivity) getActivity();
         CoordinatorLayout layout = (CoordinatorLayout)inflater.inflate(R.layout.fragment_one, container, false);
         addBtn = (FloatingActionButton)layout.findViewById(R.id.add_alarm);
@@ -148,6 +150,9 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         calendar.set(Calendar.MINUTE, min);
         calendar.set(Calendar.SECOND, days);
 
+        //2017-05-08 : 알람리스트에 새로운 알람 추가
+        alarmListAdapter.add(new AlarmItem().setTime(calendar.getTimeInMillis()));
+
         Log.i("myTag", "알람 세팅 : " +  calendar.getTimeInMillis() + ", idx : " + i);
         alarmManager.set(
                 AlarmManager.RTC_WAKEUP,
@@ -191,6 +196,8 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
             TextView lists_alarm_title = (TextView) convertView.findViewById(R.id.alarm_title);
             TextView lists_alarm_time  = (TextView) convertView.findViewById(R.id.alarm_time);
             Switch lists_alarm_enable_button = (Switch) convertView.findViewById(R.id.alarm_enable_button);
+            // 리스트 아이템 안의 enable 버튼 리스너 등록
+            // 리스트 리스너들은 getView 안에서 등록해둔다. layout id를 얻기위해??
             lists_alarm_enable_button.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -208,18 +215,40 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         public ArrayList<AlarmItem> getModifyList()
         {
             return originArr;
+
         }
+
     }
+    // enable 버튼 조작하고 바로 뒤로가기하면 call이 안되서 -> onStop으로 옮김
+    //  상태저장할때 onSaveInstanceState는 필요가 없는건지??
+//    @Override
+//    public void onSaveInstanceState(Bundle outState)
+//    {
+//        Log.d("tinyhhj","### life cycle : onSaveInstanceState start ### ");
+//        super.onSaveInstanceState(outState);
+//        ArrayList<AlarmItem> ptr = alarmListAdapter.getModifyList();
+//        dbManager.DBConnect();
+//        for(int i = 0 ; i < ptr.size() ; i++)
+//            dbManager.updateAlarm(ptr.get(i));
+//        dbManager.DBClose();
+//
+//    }
 
     @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
-        super.onSaveInstanceState(outState);
+    public void onStop() {
+        super.onStop();
+        Log.d("tinyhhj",this.toString() + "### life cycle : onStop start ### ");
         ArrayList<AlarmItem> ptr = alarmListAdapter.getModifyList();
         dbManager.DBConnect();
+        // 2017-05-08 : UI에서 새로 추가된 알람들은 db상 key가 없으므로 update를 하지 못함 : 새롭게 insert를 해준다.
         for(int i = 0 ; i < ptr.size() ; i++)
-            dbManager.updateAlarm(ptr.get(i));
+        {
+            // 알람 id를 할당 않았다면 새로 추가된 알람
+            if(ptr.get(i).getId() == 0)
+                dbManager.addAlarm(ptr.get(i));
+            else
+                dbManager.updateAlarm(ptr.get(i));
+        }
         dbManager.DBClose();
-
     }
 }

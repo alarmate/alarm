@@ -25,8 +25,8 @@ public class AlarmItem {
         aId = 0;
         aStatus = 0;
         aCal = Calendar.getInstance();
-        aTitle = "";
-        aContent = "";
+        aTitle = "default title";
+        aContent = "default contents";
         aSdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         aEnable = "N";
         aRepeat = "N";
@@ -66,26 +66,51 @@ public class AlarmItem {
     public String getTime() { return aSdf.format(aCal.getTime());}
 
     /* setter */
-    public void setId(long id) {
+    public AlarmItem setId(long id) {
         aId = id;
+        return this;
     }
-    public void setStatus(int stat)
+    public AlarmItem setStatus(int stat)
     {
         aStatus = stat;
+        return this;
     }
-    public void setTitle(String t) { aTitle = t;}
-    public void setContent(String c) {aContent = c;}
-    public void setTime(long d) {
+    public AlarmItem setTitle(String t)
+    {
+        aTitle = t;
+        return this;
+    }
+    public AlarmItem setContent(String c)
+    {
+        aContent = c;
+        return this;
+    }
+    public AlarmItem setTime(long d)
+    {
         aCal.setTimeInMillis(d);
+        return this;
     }
-    public void setTime(int year, int month, int day, int hour, int minute)
+    public AlarmItem setTime(int year, int month, int day, int hour, int minute)
     {
         aCal.clear();
         aCal.set(year, month, day, hour, minute, 0);
+        return this;
     }
-    public void setRingtone( String r) { aRingtone = r;}
-    public void setEnable ( String e ) { aEnable = e;}
-    public void setRepeat(String r) {aRepeat = r;}
+    public AlarmItem setRingtone( String r)
+    {
+        aRingtone = r;
+        return this;
+    }
+    public AlarmItem setEnable ( String e )
+    {
+        aEnable = e;
+        return this;
+    }
+    public AlarmItem setRepeat(String r)
+    {
+        aRepeat = r;
+        return this;
+    }
 
 
 
