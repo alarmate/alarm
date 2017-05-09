@@ -6,6 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+<<<<<<< HEAD
+=======
+<!--<<<<<<< HEAD-->
+<!--=======-->
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/vp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/ll">-->
+
+    <!--</android.support.v4.view.ViewPager>-->
+
+<!--&gt;>>>>>> 1a2dec68c8feba09b126e328ade2cb0519d2a5cd-->
+>>>>>>> 0c596615d158982639b1840ee3bd5c2785631e47
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
