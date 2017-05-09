@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-//    private AlarmManager alarmManager;
+    //    private AlarmManager alarmManager;
     private ViewPager vp;
     private LinearLayout ll;
-    public static int i= 0;
+    public static int i = 0;
     private PagerSlidingTabStrip tabStrip;
 
 
@@ -42,49 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         vp.setAdapter(new PageAdapter(this.getSupportFragmentManager()));
         vp.setCurrentItem(0);
-//        View.OnClickListener movePageListener = new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v)
-//            {
-//                int tag = (int) v.getTag();
-//                int i = 0;
-//                while(i<3)
-//                {
-//                    if(tag==i)ll.findViewWithTag(i).setSelected(true);
-//                    else ll.findViewWithTag(i).setSelected(false);
-//                    i++;
-//                }
-//                vp.setCurrentItem(tag);
-//            }
-//
-//        };
-
-//        ViewPager.OnPageChangeListener vpChngListener = new ViewPager.OnPageChangeListener(){
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            }
-//            @Override
-//            public void onPageSelected(int position) {
-//                int i = 0;
-//                while(i<3)
-//                {
-//                    if(position==i)
-//                    {
-//                        ll.findViewWithTag(i).setSelected(true);
-//                    }
-//                    else
-//                    {
-//                        ll.findViewWithTag(i).setSelected(false);
-//                    }
-//                    i++;
-//                }
-//            }
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        };
-//        vp.addOnPageChangeListener(vpChngListener);
         View.OnClickListener movePageListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,17 +56,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         };
-
-//        btn1.setOnClickListener(movePageListener);
-//        btn2.setOnClickListener(movePageListener);
-//        btn3.setOnClickListener(movePageListener);
-//        btn1.setTag(0);
-//        btn2.setTag(1);
-//        btn3.setTag(2);
-//
-//
-//        btn1.setSelected(true);
-
 
         ViewPager.OnPageChangeListener vpChngListener = new ViewPager.OnPageChangeListener() {
 
@@ -142,35 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
     /* 2017-05-03 : onStart에서 디비 접속 */
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
 
     }
-
-
 }
-//
-//
-//    private boolean setAlarm(int hour, int min, int days, boolean rept){
-//        Intent mAlarmIntent = new Intent("com.alarmate.application.ALARM_START");
-//        PendingIntent mPendingIntent = PendingIntent.getBroadcast(
-//                this,
-//                i,
-//                mAlarmIntent,
-//                PendingIntent.FLAG_UPDATE_CURRENT
-//
-//        );
-//        i++;
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.SECOND, days);
-//
-//        Log.i("myTag", "알람 세팅 : " +  calendar.getTimeInMillis());
-//        alarmManager.set(
-//                AlarmManager.RTC_WAKEUP,
-//                calendar.getTimeInMillis(),
-//                mPendingIntent
-//        );
-//        return true;
-//    }
