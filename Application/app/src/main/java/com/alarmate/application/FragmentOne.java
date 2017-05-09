@@ -1,7 +1,9 @@
 package com.alarmate.application;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,10 +11,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.KeyboardShortcutGroup;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,23 +32,27 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.aigestudio.wheelpicker.WheelPicker;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by seongjinlee on 2017. 5. 1..
  * 기본 알람설정 페이지
  */
 
-public class FragmentOne extends Fragment implements View.OnClickListener{
+public class FragmentOne extends Fragment implements View.OnClickListener, MainActivity.onKeyBackPressedListener {
     private static int i = 0;
     private SlidingUpPanelLayout slidingLayout;
     private MainActivity activity;
@@ -50,6 +61,7 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
     private Button btn_register;
     private Animation fabClockWise, fabAntiClockWise;
     private FloatingActionButton addBtn;
+    private boolean openSlide = false;
 
     // 디비매니저 , 리스트 뷰 추가
     private DB dbManager;
@@ -73,7 +85,8 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         Log.d("tinyhhj" , "### life cycle : onCreateView start ###");
         this.activity = (MainActivity) getActivity();
         CoordinatorLayout layout = (CoordinatorLayout)inflater.inflate(R.layout.fragment_one, container, false);
-        addBtn = (FloatingActionButton)layout.findViewById(R.id.add_alarm);
+//        addBtn = (FloatingActionButton)layout.findViewById(R.id.add_alarm);
+        addBtn = (FloatingActionButton)activity.findViewById(R.id.add_alarm);
         fabClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_clockwise);
         fabAntiClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_anticlockwise);
 
@@ -90,10 +103,12 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
                 if(slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN){
                     addBtn.startAnimation(fabClockWise);
                     slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+                    openSlide = true;
                 }
                 else {
                     slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
                     addBtn.startAnimation(fabAntiClockWise);
+                    openSlide = false;
                 }
 //                Toast.makeText(context, "Add Alarm", Toast.LENGTH_SHORT).show();
             }
@@ -109,6 +124,24 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         alarmManager = (AlarmManager)activity.getSystemService(Context.ALARM_SERVICE);
 
 
+        WheelPicker wheelPicker = (WheelPicker)layout.findViewById(R.id.wheel);
+        List<Integer> hours = new ArrayList<Integer>();
+        for(int i=1; i<=12; i++)hours.add(i);
+        wheelPicker.setData(hours);
+        WheelPicker.OnItemSelectedListener ItemSelectlistener = new WheelPicker.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(WheelPicker picker, Object data, int position) {
+                picker.setSelectedItemPosition(position);
+            }
+        };
+
+        wheelPicker.setOnItemSelectedListener(ItemSelectlistener);
+
+
+        /************************************************************
+         *                       DB연결                              *
+         ************************************************************/
         dbManager = new DB(activity);
         alarmList = (ListView) layout.findViewById(R.id.alarm_list);
 //        alarmList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -173,6 +206,28 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         }
 
     }
+
+
+
+    /* 2017-05-09 : 이성진 : 뒤로가기키 구현 */
+    @Override
+    public void onBack() {
+        if(openSlide){
+            slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+            addBtn.startAnimation(fabAntiClockWise);
+            openSlide = false;
+        } else {
+            activity.setOnKeyBackPressedListener(null);
+            activity.onBackPressed();
+        }
+    }
+    @Override
+    public void onAttach(Activity activ) {
+        super.onAttach(activ);
+        ((MainActivity)activ).setOnKeyBackPressedListener(this);
+    }
+
+
     /*************************************************************/
     /* AlarmItem lists를 view로 보여주는 adapter*/
     /*************************************************************/
@@ -252,3 +307,4 @@ public class FragmentOne extends Fragment implements View.OnClickListener{
         dbManager.DBClose();
     }
 }
+

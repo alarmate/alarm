@@ -6,6 +6,11 @@
     <color name="green">#319C31</color>
     <color name="red">#9C0031</color>
     <color name="blue">#6331FF</color>
+    <color name="gray">#808080</color>
+    <color name="dimgray">#696969</color>
+    <color name="black">#000000</color>
+    <color name="AliceBlue">#F0F8FF</color>
+
 
     <color name="fab1">#4CAF50</color>
     <color name="fab2">#2196F3</color>
