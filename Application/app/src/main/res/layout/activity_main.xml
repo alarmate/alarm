@@ -6,47 +6,83 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/tab_strip"
-        app:pstsShouldExpand="true"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:textSize="14sp"
-        android:textColor="#000000"
-        app:pstsDividerColor="@color/black"
-        app:pstsIndicatorColor="@color/dimgray"
-        app:pstsUnderlineColor="@color/gray"
-        app:pstsTabPaddingLeftRight="5dp"
-        app:pstsIndicatorHeight="4dp">
-        <!--app:pstsActivateTextColor="#FF666666"-->
-        <!--app:pstsDeactivateTextColor="#FFCCCCCC"-->
+        android:layout_height="40dp"
+        android:background="@color/coral"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    </com.astuetz.PagerSlidingTabStrip>
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tab_strip"
-        >
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v4.view.ViewPager>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_alarm"
+        <TextView
+            android:id="@+id/toolbar_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            android:src="@drawable/ic_action_plus"
-            app:layout_anchor="@id/vp"
-            app:layout_anchorGravity="bottom|right|end"
-            android:layout_marginRight="@dimen/fab_margin_right"
-            android:layout_marginBottom="16dp"
-            android:elevation="6dp"
-            app:pressedTranslationZ="12dp"/>
-    </android.support.design.widget.CoordinatorLayout>
+            android:layout_height="match_parent"
+            android:text="TABNAME"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textAppearance="@style/Toolbar.TitleText"
+            android:layout_above="@+id/relativeLayout" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/relativeLayout">
+            <com.astuetz.PagerSlidingTabStrip
+                android:id="@+id/tab_strip"
+                app:pstsShouldExpand="true"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                app:pstsDividerColor="@color/black"
+                app:pstsIndicatorColor="@color/dimgray"
+                app:pstsUnderlineColor="@color/gray"
+                app:pstsTabPaddingLeftRight="5dp"
+                app:pstsIndicatorHeight="4dp">
+                <!--app:pstsActivateTextColor="#FF666666"-->
+                <!--app:pstsDeactivateTextColor="#FFCCCCCC"-->
+
+            </com.astuetz.PagerSlidingTabStrip>
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tab_strip"
+                >
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v4.view.ViewPager>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/add_alarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:clickable="true"
+                    android:src="@drawable/ic_action_plus"
+                    app:layout_anchor="@id/vp"
+                    app:layout_anchorGravity="bottom|right|end"
+                    android:layout_marginRight="@dimen/fab_margin_right"
+                    android:layout_marginBottom="16dp"
+                    android:elevation="6dp"
+                    app:pressedTranslationZ="12dp"/>
+            </android.support.design.widget.CoordinatorLayout>
+
+        </RelativeLayout>
 
 
 </RelativeLayout>

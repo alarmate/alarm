@@ -1,0 +1,3 @@
+<resources>
+    <integer name="anim_activity_change">300</integer>
+</resources>

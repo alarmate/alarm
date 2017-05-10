@@ -10,8 +10,8 @@
     <color name="dimgray">#696969</color>
     <color name="black">#000000</color>
     <color name="AliceBlue">#F0F8FF</color>
-
-
+    <color name="coral">#FF7F50</color>
+    <color name="white">#FFFFFF</color>
     <color name="fab1">#4CAF50</color>
     <color name="fab2">#2196F3</color>
 </resources>

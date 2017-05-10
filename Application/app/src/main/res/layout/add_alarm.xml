@@ -14,27 +14,27 @@
 
         <EditText
             android:id="@+id/add_hour"
-            android:layout_width = "100dp"
+            android:layout_width = "64dp"
             android:layout_height = "40dp"/>
 
         <com.aigestudio.wheelpicker.WheelPicker
             android:id="@+id/wheel"
-            android:layout_width="wrap_content"
+            android:layout_width="129dp"
             android:layout_height="wrap_content"
             app:wheel_selected_item_text_color="@color/black"
             app:wheel_visible_item_count="5"
             app:wheel_curved="true"
             app:wheel_cyclic="true"/>
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="hour"/>
         <EditText
             android:id="@+id/add_min"
-            android:layout_width = "100dp"
+            android:layout_width = "59dp"
             android:layout_height = "40dp"/>
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="33dp"
             android:layout_height="wrap_content"
             android:text="min"/>
         <Button
@@ -42,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="등록"/>
-
     </LinearLayout>
 
 

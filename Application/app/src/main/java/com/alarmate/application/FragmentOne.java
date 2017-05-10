@@ -52,7 +52,7 @@ import java.util.List;
  * 기본 알람설정 페이지
  */
 
-public class FragmentOne extends Fragment implements View.OnClickListener, MainActivity.onKeyBackPressedListener {
+public class FragmentOne extends Fragment {
     private static int i = 0;
     private SlidingUpPanelLayout slidingLayout;
     private MainActivity activity;
@@ -86,57 +86,57 @@ public class FragmentOne extends Fragment implements View.OnClickListener, MainA
         this.activity = (MainActivity) getActivity();
         CoordinatorLayout layout = (CoordinatorLayout)inflater.inflate(R.layout.fragment_one, container, false);
 //        addBtn = (FloatingActionButton)layout.findViewById(R.id.add_alarm);
-        addBtn = (FloatingActionButton)activity.findViewById(R.id.add_alarm);
-        fabClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_clockwise);
-        fabAntiClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_anticlockwise);
+//        addBtn = (FloatingActionButton)activity.findViewById(R.id.add_alarm);
+//        fabClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_clockwise);
+//        fabAntiClockWise = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.rotate_anticlockwise);
+//
+//
+//        txt_hour = (EditText)layout.findViewById(R.id.add_hour);
+//        txt_min = (EditText)layout.findViewById(R.id.add_min);
+//
+//        slidingLayout = (SlidingUpPanelLayout)layout.findViewById(R.id.sliding_layout);
+//        slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+//        final Context context = this.getContext();
+//        View.OnClickListener addAlarmListener = new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                if(slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN){
+//                    addBtn.startAnimation(fabClockWise);
+//                    slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+//                    openSlide = true;
+//                }
+//                else {
+//                    slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+//                    addBtn.startAnimation(fabAntiClockWise);
+//                    openSlide = false;
+//                }
+////                Toast.makeText(context, "Add Alarm", Toast.LENGTH_SHORT).show();
+//            }
+//        };
+//
+//        addBtn.setOnClickListener(addAlarmListener);
+//        slidingLayout.setTouchEnabled(false);
+//
+//
+//        btn_register = (Button)layout.findViewById(R.id.btn_register);
+//        btn_register.setOnClickListener(this);
+//        WheelPicker wheelPicker = (WheelPicker)layout.findViewById(R.id.wheel);
+//        List<Integer> hours = new ArrayList<Integer>();
+//        for(int i=1; i<=12; i++)hours.add(i);
+//        wheelPicker.setData(hours);
+//        WheelPicker.OnItemSelectedListener ItemSelectlistener = new WheelPicker.OnItemSelectedListener()
+//        {
+//            @Override
+//            public void onItemSelected(WheelPicker picker, Object data, int position) {
+//                picker.setSelectedItemPosition(position);
+//            }
+//        };
+//
+//        wheelPicker.setOnItemSelectedListener(ItemSelectlistener);
+//
+//        alarmManager = (AlarmManager)activity.getSystemService(Context.ALARM_SERVICE);
 
 
-        txt_hour = (EditText)layout.findViewById(R.id.add_hour);
-        txt_min = (EditText)layout.findViewById(R.id.add_min);
-
-        slidingLayout = (SlidingUpPanelLayout)layout.findViewById(R.id.sliding_layout);
-        slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-        final Context context = this.getContext();
-        View.OnClickListener addAlarmListener = new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if(slidingLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN){
-                    addBtn.startAnimation(fabClockWise);
-                    slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-                    openSlide = true;
-                }
-                else {
-                    slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-                    addBtn.startAnimation(fabAntiClockWise);
-                    openSlide = false;
-                }
-//                Toast.makeText(context, "Add Alarm", Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        addBtn.setOnClickListener(addAlarmListener);
-        slidingLayout.setTouchEnabled(false);
-
-
-        btn_register = (Button)layout.findViewById(R.id.btn_register);
-        btn_register.setOnClickListener(this);
-
-        alarmManager = (AlarmManager)activity.getSystemService(Context.ALARM_SERVICE);
-
-
-        WheelPicker wheelPicker = (WheelPicker)layout.findViewById(R.id.wheel);
-        List<Integer> hours = new ArrayList<Integer>();
-        for(int i=1; i<=12; i++)hours.add(i);
-        wheelPicker.setData(hours);
-        WheelPicker.OnItemSelectedListener ItemSelectlistener = new WheelPicker.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(WheelPicker picker, Object data, int position) {
-                picker.setSelectedItemPosition(position);
-            }
-        };
-
-        wheelPicker.setOnItemSelectedListener(ItemSelectlistener);
 
 
         /************************************************************
@@ -168,112 +168,112 @@ public class FragmentOne extends Fragment implements View.OnClickListener, MainA
         return layout;
     }
 
-    private boolean setAlarm(int hour, int min, int days, boolean rept){
-        Intent mAlarmIntent = new Intent("com.alarmate.application.ALARM_START");
-        PendingIntent mPendingIntent = PendingIntent.getBroadcast(
-                activity,
-                i,
-                mAlarmIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+//    private boolean setAlarm(int hour, int min, int days, boolean rept){
+//        Intent mAlarmIntent = new Intent("com.alarmate.application.ALARM_START");
+//        PendingIntent mPendingIntent = PendingIntent.getBroadcast(
+//                activity,
+//                i,
+//                mAlarmIntent,
+//                PendingIntent.FLAG_UPDATE_CURRENT
+//
+//        );
+//        i++;
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, hour);
+//        calendar.set(Calendar.MINUTE, min);
+//        calendar.set(Calendar.SECOND, days);
+//
+//        //2017-05-08 : 알람리스트에 새로운 알람 추가
+//        alarmListAdapter.add(new AlarmItem().setTime(calendar.getTimeInMillis()));
+//
+//        Log.i("myTag", "알람 세팅 : " +  calendar.getTimeInMillis() + ", idx : " + i);
+//        alarmManager.set(
+//                AlarmManager.RTC_WAKEUP,
+//                calendar.getTimeInMillis(),
+//                mPendingIntent
+//        );
+//        return true;
+//    }
 
-        );
-        i++;
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, min);
-        calendar.set(Calendar.SECOND, days);
-
-        //2017-05-08 : 알람리스트에 새로운 알람 추가
-        alarmListAdapter.add(new AlarmItem().setTime(calendar.getTimeInMillis()));
-
-        Log.i("myTag", "알람 세팅 : " +  calendar.getTimeInMillis() + ", idx : " + i);
-        alarmManager.set(
-                AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(),
-                mPendingIntent
-        );
-        return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId()==R.id.btn_register){
-            if(txt_hour.getText() != null && txt_min.getText() != null){
-                int hour = Integer.parseInt(txt_hour.getText().toString());
-                int min = Integer.parseInt(txt_min.getText().toString());
-                setAlarm(hour, min, 0, false);
-            }
-        }
-
-    }
-
-
-
-    /* 2017-05-09 : 이성진 : 뒤로가기키 구현 */
-    @Override
-    public void onBack() {
-        if(openSlide){
-            slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-            addBtn.startAnimation(fabAntiClockWise);
-            openSlide = false;
-        } else {
-            activity.setOnKeyBackPressedListener(null);
-            activity.onBackPressed();
-        }
-    }
-    @Override
-    public void onAttach(Activity activ) {
-        super.onAttach(activ);
-        ((MainActivity)activ).setOnKeyBackPressedListener(this);
-    }
+//    @Override
+//    public void onClick(View v) {
+//        if(v.getId()==R.id.btn_register){
+//            if(txt_hour.getText() != null && txt_min.getText() != null){
+//                int hour = Integer.parseInt(txt_hour.getText().toString());
+//                int min = Integer.parseInt(txt_min.getText().toString());
+//                setAlarm(hour, min, 0, false);
+//            }
+//        }
+//
+//    }
 
 
-    /*************************************************************/
-    /* AlarmItem lists를 view로 보여주는 adapter*/
-    /*************************************************************/
-    public class MyListAdapter extends ArrayAdapter<AlarmItem>
-    {
-        ArrayList<AlarmItem> originArr;
 
-        public MyListAdapter (Context context, ArrayList<AlarmItem> alarms)
-        {
-            super(context, 0 , alarms);
-            originArr = alarms;
-        }
-
-        @Override
-        public View getView(int position , View convertView , ViewGroup parent)
-        {
-            AlarmItem alarm = getItem(position);
-            final int idx = position;
-            if(convertView == null)
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item , parent , false);
-            TextView lists_alarm_title = (TextView) convertView.findViewById(R.id.alarm_title);
-            TextView lists_alarm_time  = (TextView) convertView.findViewById(R.id.alarm_time);
-            Switch lists_alarm_enable_button = (Switch) convertView.findViewById(R.id.alarm_enable_button);
-            // 리스트 아이템 안의 enable 버튼 리스너 등록
-            // 리스트 리스너들은 getView 안에서 등록해둔다. layout id를 얻기위해??
-            lists_alarm_enable_button.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    originArr.get(idx).setEnable(isChecked?"Y":"N");
-                }
-            });
-
-            lists_alarm_title.setText(alarm.getTitle());
-            lists_alarm_time.setText(alarm.getTime());
-            lists_alarm_enable_button.setChecked((alarm.getEnable().equals("Y"))?true:false);
+//    /* 2017-05-09 : 이성진 : 뒤로가기키 구현 */
+//    @Override
+//    public void onBack() {
+//        if(openSlide){
+//            slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+//            addBtn.startAnimation(fabAntiClockWise);
+//            openSlide = false;
+//        } else {
+//            activity.setOnKeyBackPressedListener(null);
+//            activity.onBackPressed();
+//        }
+//    }
+//    @Override
+//    public void onAttach(Activity activ) {
+//        super.onAttach(activ);
+//        ((MainActivity)activ).setOnKeyBackPressedListener(this);
+//    }
 
 
-            return convertView;
-        }
-        public ArrayList<AlarmItem> getModifyList()
-        {
-            return originArr;
-
-        }
-
-    }
+//    /*************************************************************/
+//    /* AlarmItem lists를 view로 보여주는 adapter*/
+//    /*************************************************************/
+//    public class MyListAdapter extends ArrayAdapter<AlarmItem>
+//    {
+//        ArrayList<AlarmItem> originArr;
+//
+//        public MyListAdapter (Context context, ArrayList<AlarmItem> alarms)
+//        {
+//            super(context, 0 , alarms);
+//            originArr = alarms;
+//        }
+//
+//        @Override
+//        public View getView(int position , View convertView , ViewGroup parent)
+//        {
+//            AlarmItem alarm = getItem(position);
+//            final int idx = position;
+//            if(convertView == null)
+//                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item , parent , false);
+//            TextView lists_alarm_title = (TextView) convertView.findViewById(R.id.alarm_title);
+//            TextView lists_alarm_time  = (TextView) convertView.findViewById(R.id.alarm_time);
+//            Switch lists_alarm_enable_button = (Switch) convertView.findViewById(R.id.alarm_enable_button);
+//            // 리스트 아이템 안의 enable 버튼 리스너 등록
+//            // 리스트 리스너들은 getView 안에서 등록해둔다. layout id를 얻기위해??
+//            lists_alarm_enable_button.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    originArr.get(idx).setEnable(isChecked?"Y":"N");
+//                }
+//            });
+//
+//            lists_alarm_title.setText(alarm.getTitle());
+//            lists_alarm_time.setText(alarm.getTime());
+//            lists_alarm_enable_button.setChecked((alarm.getEnable().equals("Y"))?true:false);
+//
+//
+//            return convertView;
+//        }
+//        public ArrayList<AlarmItem> getModifyList()
+//        {
+//            return originArr;
+//
+//        }
+//
+//    }
     // enable 버튼 조작하고 바로 뒤로가기하면 call이 안되서 -> onStop으로 옮김
     //  상태저장할때 onSaveInstanceState는 필요가 없는건지??
 //    @Override
